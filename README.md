@@ -20,12 +20,65 @@
 
 ## 🛠️ 开发
 
-```bash
-# 安装依赖
-npm install
+### 1️⃣ 配置环境变量
 
-# 启动开发服务器
+复制环境变量配置文件：
+
+```bash
+cp .env.example .env
+```
+
+编辑 `.env` 文件，配置 **Publishable Key**：
+
+```bash
+VITE_ENV_ID=test-0g2g25k4a65e8da2
+VITE_PUBLISHABLE_KEY=你的 publishable_key
+```
+
+**获取 Publishable Key 步骤**：
+
+1. 访问 [CloudBase 控制台 - API 密钥管理](https://tcb.cloud.tencent.com/dev?envId=test-0g2g25k4a65e8da2#/env/apikey)
+2. 使用腾讯云账号登录
+3. 点击「生成密钥」或复制现有的「Publishable Key」
+4. 粘贴到 `.env` 文件中
+
+### 2️⃣ 安装依赖
+
+```bash
+npm install
+```
+
+### 3️⃣ 启动开发服务器
+
+```bash
 npm run dev
+```
+
+### 4️⃣ 配置数据库权限（重要！）
+
+在 CloudBase 控制台配置 `todos` 集合的读写权限：
+
+1. 访问 [数据库管理](https://tcb.cloud.tencent.com/dev?envId=test-0g2g25k4a65e8da2#/db/doc)
+2. 选择 `todos` 集合
+3. 点击「权限管理」标签
+4. 设置权限为：**所有用户可读写**（或自定义权限规则）
+
+**权限规则示例**（允许所有用户读写）：
+
+```json
+{
+  "read": "auth.openid != null",
+  "write": "auth.openid != null"
+}
+```
+
+**或者完全公开**（测试用）：
+
+```json
+{
+  "read": true,
+  "write": true
+}
 ```
 
 ## 🌐 部署
