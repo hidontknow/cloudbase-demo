@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "cloudbase": {
+      "command": "npx",
+      "args": [
+        "@cloudbase/cloudbase-mcp@latest"
+      ],
+      "description": "CloudBase MCP",
+      "env": {
+        "TCB_ENV_ID": "test-0g2g25k4a65e8da2"
+      }
+    }
+  },
+  "imports": []
+}
