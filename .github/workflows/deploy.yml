@@ -24,6 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Setup environment variables
+        run: |
+          echo "VITE_ENV_ID=${{ secrets.TCB_ENV_ID }}" > .env
+          echo "VITE_PUBLISHABLE_KEY=${{ secrets.VITE_PUBLISHABLE_KEY }}" >> .env
+
       - name: Build
         run: npm run build
 

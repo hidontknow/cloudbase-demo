@@ -140,13 +140,45 @@ interface Todo {
 
 如需使用 GitHub Actions 自动部署，需在 GitHub 仓库设置中添加以下 Secrets：
 
-1. 进入 GitHub 仓库 → Settings → Secrets and variables → Actions
-2. 添加以下 Secrets：
+### 步骤 1：进入 Secrets 设置页面
+
+访问：https://github.com/hidontknow/cloudbase-demo/settings/secrets/actions
+
+### 步骤 2：添加 Secrets
+
+点击「New repository secret」，添加以下 **4 个** Secrets：
 
 | Name | Value | 获取方式 |
 |------|-------|----------|
 | `TCB_SECRET_ID` | 你的腾讯云 SecretId | [腾讯云控制台 - 密钥管理](https://console.cloud.tencent.com/cam/capi) |
 | `TCB_SECRET_KEY` | 你的腾讯云 SecretKey | 同上，创建密钥时保存 |
-| `TCB_ENV_ID` | `test-0g2g25k4a65e8da2` | 当前环境 ID |
+| `TCB_ENV_ID` | `test-0g2g25k4a65e8da2` | CloudBase 环境 ID |
+| `VITE_PUBLISHABLE_KEY` | 你的 Publishable Key | [CloudBase API 密钥管理](https://tcb.cloud.tencent.com/dev?envId=test-0g2g25k4a65e8da2#/env/apikey) |
 
-3. 推送代码到 `main` 分支或手动触发 workflow 即可自动部署
+### 步骤 3：获取 SecretId 和 SecretKey
+
+1. 访问 [腾讯云控制台 - 密钥管理](https://console.cloud.tencent.com/cam/capi)
+2. 点击「新建密钥」
+3. 复制 **SecretId** 和 **SecretKey**
+4. 分别添加到 GitHub Secrets
+
+### 步骤 4：获取 Publishable Key
+
+1. 访问 [CloudBase API 密钥管理](https://tcb.cloud.tencent.com/dev?envId=test-0g2g25k4a65e8da2#/env/apikey)
+2. 复制 **Publishable Key**（`pub-` 开头或 JWT 格式）
+3. 添加到 GitHub Secrets
+
+### 步骤 5：测试部署
+
+配置完成后：
+- 推送代码到 `main` 分支自动部署
+- 或在 Actions 页面手动触发 "Deploy to CloudBase"
+
+---
+
+### ⚠️ 安全提示
+
+- **不要** 将 `.env` 文件提交到 Git（已添加到 `.gitignore`）
+- **不要** 在代码中硬编码密钥
+- 使用 GitHub Secrets 管理所有敏感信息
+- SecretId/SecretKey 具有较高权限，请妥善保管
